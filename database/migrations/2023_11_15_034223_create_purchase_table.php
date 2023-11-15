@@ -11,21 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('purchase', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->integer('category_id');
-            $table->string('product_code')->unique()->nullable();
-            $table->enum('is_active', ['1', '0'])->default(1);
+            $table->string('code')->unique();
+            $table->date('trx_date');
+            $table->decimal('sub_amount', 15, 2)->nullable();
+            $table->decimal('amount_total', 15, 2)->nullable();
+            $table->decimal('discount_amount', 15, 0)->nullable();
+            $table->integer('total_products')->nullable();
+            $table->integer('vendor_id');
             $table->text('description')->nullable();
-            $table->decimal('price', 15, 2);
-            $table->string('unit')->default('PCS');
-            $table->decimal('discount_amount', 15, 2);
-            $table->integer('stock');
-            $table->text('image')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
+            $table->index('vendor_id', 'index_vendor_id_mul');
         });
     }
 
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('purchase');
     }
 };

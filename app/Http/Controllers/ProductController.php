@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -63,6 +64,11 @@ class ProductController extends Controller
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+                    while (Storage::exists('public/image/' . $imageName)) {
+                        $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    }
+
                     $image->storeAs('public/image', $imageName);
                     $images[] = $imageName;
                 }
@@ -127,12 +133,17 @@ class ProductController extends Controller
                 $images = [];
                 foreach ($request->file('images') as $image) {
                     $imageName = time() . '_' . $image->getClientOriginalName();
-                    $image->storeAs('public/images', $imageName);
+
+                    while (Storage::exists('public/image/' . $imageName)) {
+                        $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    }
+
+                    $image->storeAs('public/image', $imageName);
                     $images[] = $imageName;
                 }
 
                 // Update nilai 'images' di basis data
-                DB::table('products')->where('id', $id)->update(['images' => json_encode($images)]);
+                DB::table('products')->where('id', $id)->update(['image' => json_encode($images)]);
             }
 
             // Update data produk berdasarkan ID

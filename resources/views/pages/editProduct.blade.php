@@ -103,7 +103,7 @@
                             <div class="form-group">
                             <label for="image">Image</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="image" name="file">
+                                <input type="file" class="custom-file-input" id="image" name="images[]" multiple>
                                 <label class="custom-file-label" for="image">Choose file</label>
                             </div>
                             </div>
