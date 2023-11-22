@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('reff')->nullable();
             $table->integer('in')->default(0);
             $table->integer('out')->default(0);
-            $table->integer('product_id');
+            $table->foreignId('product_id')->constrained();;
             $table->integer('remaining_stock');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

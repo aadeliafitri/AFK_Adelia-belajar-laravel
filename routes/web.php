@@ -1,9 +1,33 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/hello', [HomeController::class, 'index']);
+    Route::get('/login', [UserController::class, 'index'])->name('login');
+    Route::post('/login', [UserController::class, 'login']);
+
+    Route::get('/register', [UserController::class, 'showForm'])->name('register');
+    Route::post('/register', [UserController::class, 'register']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'main'])->name('home');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
+    Route::get('/products/add', [ProductController::class, 'create'])->name('products.create');
+    // Route::get('/products/create', [CategoryCon troller::class, 'getCategories'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+
+    // Logout
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +44,14 @@ use App\Http\Controllers\ProductController;
 //     return view('welcome');
 // });
 
-Route::get('/hello', [HomeController::class, 'index']);
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [HomeController::class, 'main'])->name('home');
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/products/add', [ProductController::class, 'create'])->name('products.create');
-// Route::get('/products/create', [CategoryController::class, 'getCategories'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+// require __DIR__.'/auth.php';

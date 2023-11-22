@@ -51,7 +51,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'discount_amount' => 'required|numeric',
             'stock' => 'required|numeric',
-            'unit' => 'required',
+            'unit' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -63,7 +63,8 @@ class ProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $imageName = time() . '.' . $image->getClientOriginalExtension();
+                    // dd($image->getClientOriginalName());
+                    $imageName = time() . '_' . now()->micro . '.' . $image->getClientOriginalExtension();
 
                     while (Storage::exists('public/image/' . $imageName)) {
                         $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();

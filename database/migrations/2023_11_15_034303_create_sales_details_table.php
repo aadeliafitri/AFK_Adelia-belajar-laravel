@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sales_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('sales_id');
-            $table->integer('product_id');
+            $table->foreignId('sales_id')->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
             $table->decimal('amount_total', 15, 2)->default(0.00);
             $table->integer('created_by')->nullable();

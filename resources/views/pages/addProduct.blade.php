@@ -90,7 +90,7 @@
                     <div class="col">
                         <div class="form-group">
                         <label for="stock">Stock</label>
-                        <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock">
+                        <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock">
                         </div>
                     </div>
                     <div class="col">
