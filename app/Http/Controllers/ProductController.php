@@ -86,7 +86,7 @@ class ProductController extends Controller
                 'stock' => $request->stock,
                 'unit' => $request->unit,
                 'image' => json_encode($images),
-                ]);
+            ]);
 
             return redirect()->route('products')
                 ->with('success', 'Product created successfully.');
@@ -159,7 +159,6 @@ class ProductController extends Controller
                 'discount_amount' => $request->discount_amount,
                 'stock' => $request->stock,
                 'unit' => $request->unit,
-                // 'image' => json_encode($images),
             ]);
 
             return redirect()->route('products')->with('success', 'Product updated successfully.');
