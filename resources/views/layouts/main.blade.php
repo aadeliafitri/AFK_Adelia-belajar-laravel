@@ -26,7 +26,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
   <!-- Highchart -->
-    <link rel="stylesheet" href="{{ asset('libraries/code/css/highcharts.css') }}">
+  <link rel="stylesheet" href="{{ asset('libraries/code/css/highcharts.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

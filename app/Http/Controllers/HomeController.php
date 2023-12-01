@@ -13,11 +13,11 @@ class HomeController extends Controller
     }
 
     public function main() {
-        $total_produk = Product::count();
+        $count_produk = Product::count();
         $total_category = Category::count();
         $total_harga = Product::sum('price');
         $total_stok = Product::sum('stock');
-
+        // dd($count_produk);
         $produk_kategori = Product::join('product_categories', 'products.category_id', '=', 'product_categories.id')
         ->selectRaw('product_categories.category_name, COUNT(products.category_id) as total_produk')
         ->groupBy('product_categories.category_name')
@@ -56,7 +56,7 @@ class HomeController extends Controller
         // dd($chartStock);
 
         return view('pages.dashboard', compact(
-            'total_produk',
+            'count_produk',
             'total_category',
             'total_harga',
             'total_stok',
