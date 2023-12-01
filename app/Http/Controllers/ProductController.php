@@ -15,16 +15,16 @@ class ProductController extends Controller
         ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
         ->select('products.*', 'product_categories.category_name as category_name');
 
-    // Cek apakah ada parameter pencarian
-    if ($request->has('search')) {
-        $searchTerm = $request->input('search');
-        $query->where(function ($query) use ($searchTerm) {
-            $query->where('products.product_name', 'like', '%' . $searchTerm . '%')
-                ->orWhere('product_categories.category_name', 'like', '%' . $searchTerm . '%');
-        });
-    }
+        // Cek apakah ada parameter pencarian
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('products.product_name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('product_categories.category_name', 'like', '%' . $searchTerm . '%');
+            });
+        }
 
-    $products = $query->paginate(5);
+        $products = $query->paginate(5);
 
 
         $startNumber = ($products->currentPage() - 1) * $products->perPage() + 1;

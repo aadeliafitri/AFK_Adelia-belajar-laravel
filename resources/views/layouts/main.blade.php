@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+  <!-- Highchart -->
+    <link rel="stylesheet" href="{{ asset('libraries/code/css/highcharts.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -32,10 +34,10 @@
     @include('layouts.navbar')
 
     @include('layouts.sidebar')
-
-    @yield('content')
+    <div class="content-wrapper" style="overflow: auto">
+        @yield('content')
     {{-- @yield('content') --}}
-
+    </div>
 
     @include('layouts.footer')
 
@@ -83,11 +85,19 @@
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+<!-- Highchart-->
+<script src="{{ asset('libraries/code/highcharts.js') }}"></script>
+<script src="{{ asset('libraries/code/highcharts-more.js') }}"></script>
+<script src="{{ asset('libraries/code/modules/exporting.js') }}"></script>
+<script src="{{ asset('libraries/code/modules/export-data.js') }}"></script>
+<script src="{{ asset('libraries/code/modules/accessibility.js') }}"></script>
+{{-- <script src="https://code.highcharts.com/highcharts.js"></script> --}}
 <script>
     $(function () {
     bsCustomFileInput.init();
   });
-  </script>
-  @yield('scripts')
+</script>
+
+@yield('script')
 </body>
 </html>

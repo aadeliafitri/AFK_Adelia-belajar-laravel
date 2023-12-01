@@ -53,17 +53,17 @@
               </p>
             </a>
           </li>
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
             <li class="nav-item">
-                <button type="submit" class="nav-link" style="border: none; background: none; padding: 0; cursor: pointer;">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Logout
-                    </p>
-                </button>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt text-start"></i>
+                        <p class="text-start">
+                            Logout
+                        </p>
+                    </button>
+                </form>
             </li>
-        </form>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

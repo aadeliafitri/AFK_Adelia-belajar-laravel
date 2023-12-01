@@ -11,7 +11,7 @@
 <body>
     <div class="container py-5">
         <div class="w-50 center border rounded px-3 py-3 mx-auto">
-        <h1>register</h1>
+        <h1>Register</h1>
         <form action="{{ route('register') }}" method="POST">
             @CSRF
             <div class="mb-3">
